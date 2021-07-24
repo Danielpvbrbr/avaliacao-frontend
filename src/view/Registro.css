@@ -5,35 +5,36 @@
 body{
     background-color: #f1f172;
 }
-#formLogin{
-    width: 350px;
-    height: 250px;
+
+#formRegistro{
+    width: 990px;
+    height: 495px;
     margin: 0 auto;
-    margin-top: 9rem;
+    margin-top: 3rem;
     padding: 30px;
     display: flex;
     justify-content: center;
 }
 
-#formLogin fieldset{
+#formRegistro fieldset{
    padding: 25px;
    background-color: #eeee8a;
 }
 
-#formLogin input{
+#formRegistro input, .campIput{
     width:95%;
     height:22px;
     padding:4px;
     margin-bottom: 15px;
 }
 
-#formLogin button{
+#formRegistro button{
     width:100%;
     height:33px;
     margin-bottom: 5px;
 }
 
-#formLogin .registrar{
+#formRegistro .registrar{
     cursor: pointer;
     color: #6E6E6E;
     font-size: 11pt;
@@ -41,7 +42,7 @@ body{
     margin-right: 18.9%;
 }
 
-#formLogin .esqSenha{
+#formRegistro .esqSenha{
     cursor: pointer;
     color: #6E6E6E;
     font-size: 11pt;
