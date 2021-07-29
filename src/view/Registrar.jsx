@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './registrar.css';
-import Input from '../../components/Input';
-import Menu from '../../components/Menu';
+import './Registrar.css';
+import Input from '../components/Input';
+import Menu from '../components/Menu';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -24,9 +24,10 @@ export default class Registrar extends Component {
         axios.post("http://localhost:8000/api/registros", { getNome, getPis, getMat })
             .then(res => {
                 console.log(res.data)
-            })
-        window.location.replace('/')
-        alert("Cadastro realizado com sucesso!")
+                alert("Cadastro realizado com sucesso!");
+                window.location.replace('/');
+            });
+        
         e.preventDefault()
     };
 
@@ -44,22 +45,19 @@ export default class Registrar extends Component {
                         <h4 className="text-center text-white mt-5">PAINEL DE REGISTRO DE COLABORADOR</h4>
 
                         <form id='formRegistro' className=" d-flex justify-content-center align-items-center" onSubmit={this.handleSubmit}>
-                            <section className="w-25  justify-content-center">
+                            <section className="w-50  justify-content-center">
 
                                 <div className="w-100 ">
                                     <label className="text-white">Nome:</label>
-                                    <Input type='texto' className="form-control form-control-md" required onChange={this.handleChange} name="getNome" placeholder="Digite seu nome" maxLength='20' />
+                                    <Input type='texto' className="form-control " required onChange={this.handleChange} name="getNome" placeholder="Digite seu nome" maxLength='20' />
 
                                     <label className="text-white">PIS:</label>
-                                    <Input type='texto' className="form-control form-control-md" required onChange={this.handleChange} name="getPis" placeholder="Digite seu Pis" maxLength='20' />
+                                    <Input type='texto' className="form-control " required onChange={this.handleChange} name="getPis" placeholder="Digite seu Pis" maxLength='20' />
 
                                     <label className="text-white">Matrícula:</label>
-                                    <Input type='texto' className="form-control form-control-md" required onChange={this.handleChange} name="getMat" placeholder="Digite a matrícula" maxLength='16' />
+                                    <Input type='texto' className="form-control" required onChange={this.handleChange} name="getMat" placeholder="Digite a matrícula" maxLength='16' />
 
-                                    <button id="btn" type='texto' className="btn btn-success">Cadastrar</button>
-                                    <Link to={'/'}>
-                                        <button id="btn" className="btn btn-secondary">Voltar</button>
-                                    </Link>
+                                    <button id="btn" type='texto' className="btn btn-success mt-1 h-25">Cadastrar</button>
                                 </div>
 
                             </section>

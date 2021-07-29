@@ -12,6 +12,7 @@ export default class MarcPontoList extends Component {
         this.state = {
             valueDados: [],
             data: '',
+
         }
 
     };
@@ -21,12 +22,44 @@ export default class MarcPontoList extends Component {
 
     };
 
-    ConvertDate = () => {
-        const { data } = this.state;
+    workedHours = () => {
         const cookies = new Cookies();
-        const dateMod = data.split('-').reverse().join('');
-        cookies.set("dateMod", dateMod, { path: "/listMarcacao" });
-        window.location.replace('/listMarcacao')
+        const hr1 = cookies.get('v0') || '0000';
+        const hr2 = cookies.get('v1') || '0000';
+        const hr3 = cookies.get('v2') || '0000';
+        const hr4 = cookies.get('v3') || '0000';
+
+        const a = hr1.split('');
+        a.splice(2, ".", ".");
+
+        const b = hr2.split('');
+        b.splice(2, ".", ".");
+
+        const c = hr3.split('');
+        c.splice(2, ".", ".");
+
+        const d = hr4.split('');
+        d.splice(2, ".", ".");
+
+        const h1 = Number.parseFloat(a.join(''));
+        const h2 = Number.parseFloat(b.join(''));
+        const h3 = Number.parseFloat(c.join(''));
+        const h4 = Number.parseFloat(d.join(''));
+
+        const trabalhadas = h1 - h2 + h3 - h4;
+        const faltosas = h1 - h2 + h3 - h4;
+        const extra = h1 - h2 + h3 - h4;
+
+        const horasTb = (trabalhadas.toFixed(2).split(''));
+        const horasFt = (faltosas.toFixed(2).split(''));
+        const horasHx = (extra.toFixed(2).split(''));
+
+        horasTb.shift();
+        horasFt.shift();
+        horasHx.shift();
+        horasHx.slice(0, 4)
+
+        return [Number.parseFloat(horasTb.join('')), Number.parseFloat(horasFt.join('')), Number.parseFloat(horasHx.join('')) - 9]
     };
 
     componentDidMount = () => {
@@ -36,10 +69,28 @@ export default class MarcPontoList extends Component {
         axios.get(`http://localhost:8000/api/dados/cap/${getPis}`).then(res => {
             const searchDate = res.data.filter(b => b.dado_user.toString().slice(10, 18) === dateMod)
             this.setState({ valueDados: searchDate });
+
+            searchDate.map((item, i) => {
+                const horat = item.dado_user.slice(18, 22)
+                cookies.set(`v${i++}`, horat, { path: "/" });
+            });
         })
 
+    };
+    
+    //Atualiza tabela
+    ToUpdate = () => {
+        window.location.replace('/listMarcacao')
+    };
 
+    //COnverte data remove -
+    ConvertDate = () => {
+        const { data } = this.state;
+        const cookies = new Cookies();
+        const dateMod = data.split('-').reverse().join('');
+        cookies.set("dateMod", dateMod, { path: "/listMarcacao" });
 
+        window.location.replace('/listMarcacao')
     };
 
 
@@ -47,21 +98,9 @@ export default class MarcPontoList extends Component {
     formatTime = (hr) => {
         const hora = hr.split('');
         hora.splice(2, ":", ":");
+
         return hora.join('')
     };
-
-    calcHoras = () => {
-        const cookies = new Cookies();
-        const valor = this.state.valueDados;
-        valor.map((item, i) => {
-            const horat = item.dado_user.slice(18, 22)
-            cookies.set(`v${i++}`, horat, { path: "/listMarcacao" });
-        });
-        const hr1 = cookies.get('v1');
-        const hr2 = cookies.get('v2');
-        const hr3 = cookies.get('v3');
-        const hr4 = cookies.get('v4');
-    }
 
     //Formatação de data
     formatDate = (hd) => {
@@ -74,7 +113,7 @@ export default class MarcPontoList extends Component {
 
     render() {
         const { valueDados } = this.state;
-        this.calcHoras()
+        this.workedHours()
         return (
             <div id="contain-central" className="container bg-primary">
 
@@ -84,7 +123,6 @@ export default class MarcPontoList extends Component {
                     </section>
 
                     <section id="contain-listMarcacao" className="col-md-12 ">
-
 
                         <div className="form-inline  d-flex justify-content-center align-items-center">
                             <label htmlFor="mat" className="sr-only text-white">Selecione a data para visualizar os dados:</label>
@@ -115,6 +153,24 @@ export default class MarcPontoList extends Component {
                                         </tr>
                                     )
                                 }
+                            </tbody>
+                        </table>
+                        <table className="table table-striped table-bordered  table-dark">
+                            <thead className="thead-dark">
+                                <tr>
+                                    <th scope="col">Horas trabalhadas</th>
+                                    <th scope="col">Horas faltosas</th>
+                                    <th scope="col">Horas extra</th>
+                                    <th scope="col">Atulizar Valores</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{this.workedHours()[0]}</td>
+                                    <td>{this.workedHours()[1] < 9 ? this.workedHours()[1] : '0'}</td>
+                                    <td>{this.workedHours()[2].toFixed(2)}</td>
+                                    <td><button className="btn btn-success w-100 h-25" onClick={() => this.ToUpdate()}>Atulizar</button></td>
+                                </tr>
                             </tbody>
                         </table>
                     </section>

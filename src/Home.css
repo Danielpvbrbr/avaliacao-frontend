@@ -7,15 +7,33 @@ body {
   margin-top: 2rem;
 }
 
-#contai-select h3 {
+#contain-select h3 {
   text-align: center;
   color: white;
   font-size: 15pt;
 }
 
-#contai-select {
+#contain-select p {
+  color: rgb(109, 104, 104);
+  font-size: 11pt;
+  margin-top: 7px;
+  margin-bottom: 0;
+}
+
+#contain-select li {
+  line-height: 9px;
+  border: 2px solid #000;
+  cursor :pointer;
+}
+
+#contain-select {
   width: 500px;
   height: 400px;
   margin: 0 auto;
+}
+
+#contain-select #select{
+  width: 480px;
+  height: 350px;
   overflow: auto;
 }

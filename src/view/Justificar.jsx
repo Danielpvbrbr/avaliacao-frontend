@@ -32,33 +32,15 @@ export default class Justificar extends Component {
     componentDidMount = () => {
         const cookies = new Cookies();
         const getPis = cookies.get('getPis');
-        const dateMod = cookies.get('dateMod');
         //'01022019'
         axios.get(`http://localhost:8000/api/dados/cap/${getPis}`).then(res => {
-            const searchDate = res.data.filter(b => b.dado_user.toString().slice(10, 18) === dateMod)
+            const searchDate = res.data.filter(b => b.dado_user)
             this.setState({ valueDados: searchDate });
-            console.log(searchDate)
+            // console.log(searchDate)
         })
 
     };
 
-
-    //Formatação de hora
-    formatTime = (hr) => {
-        const hora = hr.split('');
-        hora.splice(2, ":", ":");
-
-        return hora.join('');
-    };
-
-    //Formatação de data
-    formatDate = (hd) => {
-        const data = hd.split('');
-        data.splice(2, "/", "/")
-        data.splice(5, "/", "/")
-
-        return data.join('')
-    };
 
     render() {
         const { valueDados } = this.state;
@@ -70,43 +52,32 @@ export default class Justificar extends Component {
                         <Menu />
                     </section>
 
-                    <section id="contain-listMarcacao" className="col-md-12 ">
+                    <section className="col-md-12">
+                        <h4 className="text-center text-white mt-5">PAINEL DE REGISTRO DE COLABORADOR</h4>
 
-                        <form onSubmit={this.handleSubmit} className=" row contain-form ">
+                        <form id='formRegistro' className=" d-flex justify-content-center align-items-center" onSubmit={this.handleSubmit}>
+                            <section className="w-50  justify-content-center">
+                                <div className="inp1 form-group">
+                                    <label htmlFor="formFileSm" className="form-label">Setor: *</label>
+                                    <select id="setor" className="form-control form-control-sm">
+                                        <option className="value" value="administrador"></option>
+                                    </select>
+                                </div>
 
-                            <div className="col-md-12">
-                                <section id="formJust" className="form border  d-flex justify-content-center">
+                                <div className="w-100 ">
+                                    <label className="text-white">Data da marcação:</label>
+                                    <Input type='date' className="form-control " required onChange={this.handleChange} name="getNome" placeholder="Digite seu nome" maxLength='20' />
 
-                                    <div className="mb-1 inp1">
-                                        <label htmlFor="formFile" className="form-label">Código da cliente:</label>
-                                        <Input className="form-control form-control-sm " onChange={this.handleChange} name="cod_produt" type="text" />
-                                    </div>
+                                    <label className="text-white">hora:</label>
+                                    <Input type='time' className="form-control " required onChange={this.handleChange} name="getPis" placeholder="Digite seu Pis" maxLength='20' />
 
-                                    <div className="mb-1 inp">
-                                        <label htmlFor="formFileMultiple" className="form-label">Nome do clientes:</label>
-                                        <Input className="form-control form-control-sm " onChange={this.handleChange} name="descricao_produt" type="text" />
-                                    </div>
+                                    <button id="btn" type='texto' className="btn btn-success mt-1 h-25 m-1">Adicionar</button>
+                                    <button id="btn" type='texto' className="btn btn-success mt-1 h-25 m-1">Alterar</button>
+                                </div>
 
-                                    <div className="mb-1 inp">
-                                        <label htmlFor="formFileSm" className="form-label">Data de nascimento:</label>
-                                        <Input className="form-control form-control-sm " onChange={this.handleChange} name="forn_produt" type="date" />
-                                    </div>
-
-                                </section>
-                                
-                            <div id="contButton" className="w-100 bg-dark p-1 d-flex justify-content-center align-items-center">
-                                <section>
-                                    <button className="btn-sm btn-primary m-1">Adicionar</button>
-                                    <button className="btn-sm btn-primary m-1">Alterar</button>
-                                </section>
-                            </div>
-                            </div>
-
+                            </section>
                         </form>
-
-
                     </section>
-
                 </div>
 
             </div>

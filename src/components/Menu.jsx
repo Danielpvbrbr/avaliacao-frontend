@@ -16,11 +16,7 @@ export default class Menu extends Component {
                 </li>
 
                 <li className="nav-item">
-                    <Link to={"/dados"} className="text-white nav-link">Dados</Link>
-                </li>
-
-                <li className="nav-item">
-                    <Link to={"/registro"} className="text-white nav-link">Registro</Link>
+                    <Link to={"/registrar"} className="text-white nav-link">Registro</Link>
                 </li>
 
                 <li className="nav-item">
@@ -29,10 +25,6 @@ export default class Menu extends Component {
 
                 <li className="nav-item">
                     <Link to={"/import"} className="text-white nav-link">Import</Link>
-                </li>
-
-                <li className="nav-item">
-                    <Link to={"/"} className="text-white nav-link">Sair</Link>
                 </li>
             </ul>
         );
