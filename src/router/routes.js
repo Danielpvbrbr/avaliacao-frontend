@@ -1,20 +1,23 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Registro from '../view/Registro';
+import Registro from '../view/auth/registrar';
 import Home from '../Home';
-import BancoHrList from '../view/BancoHrList';
+import Dados from '../view/Dados';
 import MarcPontoList from '../view/MarcPontoList';
-import Auth from '../view/auth/auth';
+import Justificar from '../view/Justificar';
+import Import from '../view/Import';
+// import Auth from '../view/auth/auth';
 
 export default function Routes(){ 
     return(
         <BrowserRouter>
             <Switch>
-                <Route exact path="/" component={Auth} />
-                <Route path="/home" component={Home} />
+                <Route exact path="/" component={Home} />
                 <Route path="/registro" component={Registro} />
                 <Route path="/listMarcacao" component={MarcPontoList} />
-                <Route path="/ListaHoras" component={BancoHrList} />
+                <Route path="/dados" component={Dados} />
+                <Route path="/justificar" component={Justificar} />
+                <Route path="/import" component={Import} />
             </Switch>
         </BrowserRouter>
     )

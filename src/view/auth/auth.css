@@ -3,5 +3,6 @@
 }
 
 #contain-acesso #btn{ 
-  height:2.5rem
+  height:2.5rem;
+  margin-right:2px;
 }

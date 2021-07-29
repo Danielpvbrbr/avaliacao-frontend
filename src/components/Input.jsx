@@ -16,6 +16,7 @@ export default class Inpunt extends Component {
                  maxLength={this.props.maxLength}
                  readOnly={this.props.readOnly}
                  disabled={this.props.disabled}
+                 accept={this.props.accept}
                  />
             </div>
         )

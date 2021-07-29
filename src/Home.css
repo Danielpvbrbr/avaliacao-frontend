@@ -1,7 +1,21 @@
-body{
+body {
   background-color: #4169E1 !important;
 }
-#contain-central{
-  height:605px;
+
+#contain-central {
+  height: 605px;
   margin-top: 2rem;
+}
+
+#contai-select h3 {
+  text-align: center;
+  color: white;
+  font-size: 15pt;
+}
+
+#contai-select {
+  width: 500px;
+  height: 400px;
+  margin: 0 auto;
+  overflow: auto;
 }

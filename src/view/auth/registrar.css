@@ -1,0 +1,11 @@
+#contain-registro form{ 
+  margin-top: 5rem;
+}
+#contain-registro legend{ 
+ font-size: 15pt;
+}
+
+#contain-registro #btn{ 
+  height:2.5rem;
+  margin:10px 5px 0px 0px;
+}

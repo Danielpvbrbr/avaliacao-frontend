@@ -1,0 +1,10 @@
+.contain-form .form{ 
+  display:flex;
+}
+/* .contain-form #formJust{
+  height:220px;
+} */
+
+#container-func{
+  height:500px;
+}
